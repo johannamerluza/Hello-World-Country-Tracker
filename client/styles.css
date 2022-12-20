@@ -1,0 +1,20 @@
+    .google-visualization-tooltip {
+
+      width: 150px !important;
+      border: none !important;
+      border-radius: 21px !important;
+      /* background-color: rgb(30, 50, 230) !important; */
+      position: absolute !important;
+      box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75) !important;
+      /* background: -moz-linear-gradient(30deg, rgb(30, 50, 230) 30%, rgb(90, 140, 250) 70%) !important;
+      background: -webkit-linear-gradient(30deg, rgb(30, 50, 230) 30%, rgb(90, 140, 250) 70%) !important;
+      background: -o-linear-gradient(30deg, rgb(30, 50, 230) 30%, rgb(90, 140, 250) 70%) !important;
+      background: -ms-linear-gradient(30deg, rgb(30, 50, 230) 30%, rgb(90, 140, 250) 70%) !important;
+      background: linear-gradient(120deg, rgb(30, 50, 230) 30%, rgb(90, 140, 250) 70%) !important; */
+      font-size: 10px !important;
+
+    }
+
+    body{
+      background-color: pink;
+    }
