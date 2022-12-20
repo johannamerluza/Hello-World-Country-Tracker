@@ -1,0 +1,1 @@
+# map_solo_project
