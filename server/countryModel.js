@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-
-const MONGO_URI =
-  'mongodb+srv://brandonjojo:codesmith@cluster0.uniph4p.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_URI = require('./secrets');
 
 mongoose
   .connect(MONGO_URI, {
