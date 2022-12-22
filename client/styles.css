@@ -25,34 +25,23 @@ body {
 }
 
 #helloWorld {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   font-size: 6rem;
   text-align: center;
   font-family: Source Code Pro, Roboto Mono, Roboto, Verdana, sans-serif;
 }
 
 #mapDiv div {
-  /* display: flexbox;
-flex-direction: row;
-justify-content: center; */
-  /* align-self: center; */
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 #topCenter {
   display: flexbox;
   flex-direction: column;
-  /* align-content: center; */
   align-items: center;
   justify-content: center;
 }
 
-/* #countryForm {
-display: flex;
-flex-direction: column;
-justify-content: center;
-text-align: center;
-} */
 #hidden {
   height: 13px;
   margin-bottom: 10px;
@@ -63,6 +52,16 @@ text-align: center;
   text-align: center;
 }
 
+#firstColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  /* width: 75%; */
+  /* display: inline-block;
+  /* margin: 0 auto; */
+  /* align-self: flex-start; */
+}
 #firstRowForm {
   display: flex;
   flex-direction: row;
@@ -70,43 +69,105 @@ text-align: center;
   align-items: center;
 }
 
-input[type='text'] {
+#enterCountry {
   /* margin: 10px auto; */
   text-align: center;
-  /* display: block; */
-  /* margin-left: auto; */
+  background-color: #d0d9e3;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.77);
   margin-right: 5px;
   padding: 10px;
-  border: 0;
+  border: 1px solid gray;
   border-radius: 3px;
   width: 220px;
+  /* min-width: 150px; */
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   height: 18px;
 }
 
-select {
-  /* appearance: none; */
-  /* margin: 10px auto; */
+#enterNotes {
+  margin: 10px auto 0px auto;
+  color: rgba(0, 0, 0, 0.77);
+  text-align: center;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 3px;
+  width: 450px;
+  /* min-width: 310px; */
+  background-color: #d0d9e3;
+  box-shadow: 0 0 15px 4px rgba(104, 104, 104, 0.381);
+  height: 18px;
+}
+
+#menu {
+  display: inline-block;
+  background-color: #d0d9e3 !important;
   margin-left: 5px;
   text-align: center;
   width: 220px;
+
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   outline: 0;
-  background: #f1f1f1;
-  color: black;
-  /* cursor: pointer; */
-  border: 1px solid black;
+  color: rgba(0, 0, 0, 0.77);
+  border: 1px solid gray;
   border-radius: 3px;
   height: 40px;
   padding: 10px;
 }
 
+option {
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
 #submitButton {
   font-weight: bold;
-  display: block;
-  margin: 10px auto 30px auto;
-  width: 470px;
-  height: 40px;
+  background-color: #007f5f;
+  margin: 10px auto 10px auto;
+  color: #f1f1f1;
+  border: 1px solid #f1f1f16b;
+  border-radius: 5px;
+  align-self: center;
+  height: 90px;
+  margin-left: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#submitButton:hover {
+  background-color: #ffbe69ba;
+  transition: 0.3s;
+}
+
+#submitButton:active {
+  background-color: #ffbe69ba;
+}
+
+/* .cTabs {
+  margin: 10px 2px 2px 2px;
+  border-radius: 5px;
+  color: #f1f1f1;
+  height: 2.8rem;
+  border: 1px solid #f1f1f16b;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.currentTab {
+  background-color: #007f5f;
+} */
+
+#submitDiv {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+#formDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  margin: 0 auto;
 }
 
 #visitedList,
@@ -174,13 +235,13 @@ select {
 
 .cTabs {
   background-color: #adb5bd78;
-  margin: 2px;
+  /* margin: 10px 2px 2px 2px;
   border-radius: 5px;
   color: #f1f1f1;
   height: 2.8rem;
   border: 1px solid #f1f1f16b;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: bold; */
 }
 
 .cTabs:hover {
@@ -192,15 +253,18 @@ select {
   background-color: #007f5f;
 }
 
-.currentTab {
-  background-color: #007f5f;
-  margin: 2px;
+.currentTab,
+.cTabs {
+  margin: 10px 2px 2px 2px;
   border-radius: 5px;
   color: #f1f1f1;
   height: 2.8rem;
   border: 1px solid #f1f1f16b;
   text-transform: uppercase;
   font-weight: bold;
+}
+.currentTab {
+  background-color: #007f5f;
 }
 
 .currentTab:hover {

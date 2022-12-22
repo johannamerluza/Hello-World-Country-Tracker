@@ -11,8 +11,6 @@ countryController.getAllCountries = (req, res, next) => {
         error: err,
       });
     } else {
-      // console.log(countries);
-      // console.log(visitedArray);
       res.locals.allCountries = countries;
       return next();
     }
@@ -20,9 +18,9 @@ countryController.getAllCountries = (req, res, next) => {
 };
 
 countryController.addCountry = (req, res, next) => {
-  const { countryName, bucketList } = req.body;
-  console.log(typeof bucketList);
-  model.Country.create({ countryName, bucketList }, (err, country) => {
+  const { countryName, bucketList, toDo } = req.body;
+  console.log(req.body);
+  model.Country.create({ countryName, bucketList, toDo }, (err, country) => {
     if (err) {
       console.log('ERRRORRR', err);
       return next({

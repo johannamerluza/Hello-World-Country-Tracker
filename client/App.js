@@ -3,6 +3,7 @@ import axios from 'axios';
 import Map from './Components/Map.js';
 import Input from './Components/Input.js';
 import CountryDisplay from './Components/CountryDisplay.js';
+// import ModalCopy from './Components/Modal.js';
 
 const africa = new Set([
   'Algeria',
@@ -204,22 +205,7 @@ const asia = new Set([
   'United Arab Emirates',
   'Yemen',
 ]);
-// const middleEast = new Set([
-//   'Bahrain',
-//   'Iran',
-//   'Iraq',
-//   'Israel',
-//   'Jordan',
-//   'Kuwait',
-//   'Lebanon',
-//   'Oman',
-//   'Palestine',
-//   'Qatar',
-//   'Saudi Arabia',
-//   'Syria',
-//   'United Arab Emirates',
-//   'Yemen',
-// ]);
+
 const oceania = new Set([
   'Australia',
   'Federated Islands of Micronesia',
@@ -306,6 +292,7 @@ class App extends Component {
       filtered: false,
       filterArray: [],
       currentContinent: 'world',
+      toDo: {},
     };
     this.url = 'http://localhost:3000/api';
     this.submit = this.submit.bind(this);
@@ -326,11 +313,9 @@ class App extends Component {
       this.setState({ ...this.state, filtered: false });
       return this.getAllCountries();
     }
-    // this.getAllCountries();
     const newRegion = regions[e.target.value];
     const newCount = countryCount[e.target.value];
     const continent = worldCountriesObj[e.target.value];
-    console.log(continent);
     const visitedColor = this.visitedColor;
     const bucketListColor = this.bucketListColor;
     const countriesArray = [...this.state.countries];
@@ -360,7 +345,7 @@ class App extends Component {
       'Popularity',
       { role: 'tooltip', type: 'string', p: { html: true } },
     ];
-    console.log([firstEl, ...sortedVisitedArray, ...sortedBucketList]);
+    // console.log([firstEl, ...sortedVisitedArray, ...sortedBucketList]);
     return this.setState({
       ...this.state,
       filtered: true,
@@ -376,7 +361,6 @@ class App extends Component {
   }
 
   getAllCountries() {
-    // console.log('GETTIN THEM COUNTRIES');
     axios
       .get(this.url)
       .then((res) => {
@@ -385,15 +369,18 @@ class App extends Component {
         const countriesArray = res.data;
         const bucketList = [];
         const visitedArray = [];
+        const toDo = {};
         countriesArray.forEach((c) => {
           if (!c.bucketList) {
             visitedArray.push([c.countryName, 0, 'Visited']);
           } else {
             bucketList.push([c.countryName, 100, 'Bucket List']);
           }
+          if (c.toDo.length > 0) {
+            toDo[c.countryName] = c.toDo;
+          }
         });
         const axisColors = [visitedColor, bucketListColor];
-        // console.log(axisColors);
         if (bucketList.length === 0 && visitedArray.length > 0) {
           axisColors.pop();
         } else if (bucketList.length > 0 && visitedArray.length === 0) {
@@ -419,6 +406,7 @@ class App extends Component {
           },
           countryTotal: countryCount.world,
           currentContinent: 'world',
+          toDo: toDo,
         });
       })
       .catch((err) => {
@@ -426,8 +414,8 @@ class App extends Component {
       });
   }
 
-  postCountry(country, option) {
-    const newCountry = { countryName: country, bucketList: option };
+  postCountry(country, option, toDo) {
+    const newCountry = { countryName: country, bucketList: option, toDo: toDo };
     axios
       .post(this.url, newCountry)
       .then((response) => {
@@ -470,23 +458,45 @@ class App extends Component {
   submit(e) {
     e.preventDefault();
     this.setState({ ...this.state, invalid: 'none' });
-    let input = e.target['0']['value'];
+    console.log('finding notes', e.target['2']['value']);
+    let input = e.target['0'].value;
     let option = e.target['1'].value;
+    let toDo = e.target['2'].value;
     console.log('option', option === '');
+
     if (input === '' || option === '') {
-      console.log('invalid');
+      console.log('invalid input');
+      e.target['0']['value'] = '';
+      e.target['1']['value'] = '';
+      e.target['2']['value'] = '';
+      this.render();
       return this.setState({ ...this.state, invalid: '' });
-      // return this.render;
     }
+    const toDoArray = [];
+    if (toDo !== '') {
+      let string = '';
+      console.log('length', toDo.length);
+      for (let i = 0; i < toDo.length; i++) {
+        if (toDo[i] === ',') {
+          if (toDo[i + i]) i++;
+          console.log(string);
+          toDoArray.push(string);
+          string = '';
+        } else {
+          string += toDo[i];
+        }
+      }
+      toDoArray.push(string);
+    }
+    console.log('toDoArray: ', toDoArray);
+
     let newCountry = '';
     if (input.includes(' ')) {
       const splitCountry = e.target['0']['value'].toLowerCase().split(' ');
-      console.log('split', splitCountry);
       splitCountry.forEach((word, i) => {
         if (word === 'of' || word === 'and') {
           splitCountry[i] = word;
         } else {
-          console.log(word);
           let newWord = word[0].toUpperCase() + word.substring(1);
           splitCountry[i] = newWord;
         }
@@ -507,14 +517,18 @@ class App extends Component {
     option === 'bucketList' ? (option = true) : (option = false);
     // console.log(option);
     e.target['0']['value'] = '';
-    this.postCountry(newCountry, option);
+    e.target['1']['value'] = '';
+    e.target['2']['value'] = '';
+    this.postCountry(newCountry, option, toDoArray);
   }
 
   render() {
-    console.log('current continent: ', this.state.currentContinent);
+    // console.log('current continent: ', this.state.currentContinent);
+    console.log('line 527', this.state);
     return (
       <div id="topCenter">
         <h1 id="helloWorld">Hello World.</h1>
+        {/* <ModalCopy /> */}
         <Input handleSubmit={this.submit} invalid={this.state.invalid} />
         <Map
           options={this.state.options}
@@ -524,7 +538,6 @@ class App extends Component {
               : this.state.filteredArray
           }
         />
-        {/* <Input handleSubmit={this.submit} invalid={this.state.invalid} /> */}
         <CountryDisplay
           allCountries={
             !this.state.filtered

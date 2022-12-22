@@ -8,7 +8,6 @@ const Map = (props) => (
       id="worldMap"
       chartType="GeoChart"
       width="90%"
-      // height="400px"
       data={props.countries}
       options={props.options}
     />
