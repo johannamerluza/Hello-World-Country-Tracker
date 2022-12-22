@@ -15,7 +15,7 @@ const CountryDisplay = (props) => {
     // console.log(props.allCountries[i]);
     if (props.allCountries[i][2] === 'Visited') {
       visitedCountryList.push(
-        <li key={`li${i}`}>
+        <li className="mainList" key={`li${i}`}>
           {xButton}
           {props.allCountries[i][0]}
           {props.exist(props.allCountries[i][0]) ? (
@@ -27,7 +27,7 @@ const CountryDisplay = (props) => {
       );
     } else {
       bucketListList.push(
-        <li key={`li${i}`}>
+        <li className="mainList" key={`li${i}`}>
           <button id="upgrade" className="listButton" onClick={props.upgrade}>
             &#9650;
           </button>

@@ -10,6 +10,7 @@ import { ModalCopy } from './Components/Modal.js';
 import Kelvin from './images/kelvin.png';
 import Christian from './images/christian.png';
 import Steven from './images/Steven.png';
+import Kat from './images/Kat.png';
 
 const africa = new Set([
   'Algeria',
@@ -347,7 +348,7 @@ class App extends Component {
         }
       }
     });
-    console.log('visitedArray: ', visitedArray);
+    // console.log('visitedArray: ', visitedArray);
     const axisColors = [visitedColor, bucketListColor];
     if (bucketList.length === 0 && visitedArray.length > 0) {
       axisColors.pop();
@@ -469,10 +470,11 @@ class App extends Component {
       .catch((err) => {
         console.log('error in upgrade: ', err);
       });
+    return this.getAllCountries();
   }
 
   exist(country) {
-    console.log('in exist: ', country, this.state.toDo[country]);
+    // console.log('in exist: ', country, this.state.toDo[country]);
     return this.state.toDo[country] ? true : false;
   }
 
@@ -558,6 +560,9 @@ class App extends Component {
       notes.push(<img src={Christian}></img>);
       notes.push(<img src={Steven}></img>);
       return notes;
+    }
+    if (country === 'Philippines') {
+      notes.push(<img src={Kat}></img>);
     }
     const list = this.state.toDo[country];
     list.forEach((note) => {
