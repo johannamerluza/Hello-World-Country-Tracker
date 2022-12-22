@@ -280,5 +280,16 @@ option {
 }
 
 .modalButton {
-  display: inline;
+  color: #ffbf69;
+  font-size: 0.7rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  margin-left: 5px;
+}
+
+.modalButton:hover,
+.modalButton:active {
+  color: #f1f1f1;
+  transition-duration: 0.2s;
 }

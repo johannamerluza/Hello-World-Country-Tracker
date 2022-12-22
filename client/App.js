@@ -6,6 +6,10 @@ import CountryDisplay from './Components/CountryDisplay.js';
 import { ModalProvider } from 'styled-react-modal';
 // import ModalCopy from './Components/Modal.js';
 import { ModalCopy } from './Components/Modal.js';
+// import FileLoader from 'file-loader';
+import Kelvin from './images/kelvin.png';
+import Christian from './images/christian.png';
+import Steven from './images/Steven.png';
 
 const africa = new Set([
   'Algeria',
@@ -505,7 +509,7 @@ class App extends Component {
       }
       toDoArray.push(string);
     }
-    console.log('toDoArray: ', toDoArray);
+    // console.log('toDoArray: ', toDoArray);
 
     let newCountry = '';
     if (input.includes(' ')) {
@@ -541,10 +545,21 @@ class App extends Component {
 
   toDoList(country) {
     console.log('in toDO list: ', this.state.toDo[country]);
-    const list = this.state.toDo[country];
     let modalText = '';
     let notes = [];
     notes.push(<h2>{country}</h2>);
+    if (country === 'Colombia') {
+      notes.push(<li>• Grab coffee with Kelvin!</li>);
+      notes.push(<img src={Kelvin}></img>);
+      return notes;
+    }
+    if (country === 'Canada') {
+      notes.push(<li>• Visit Christian and Steven!</li>);
+      notes.push(<img src={Christian}></img>);
+      notes.push(<img src={Steven}></img>);
+      return notes;
+    }
+    const list = this.state.toDo[country];
     list.forEach((note) => {
       notes.push(<li>• {note}</li>);
     });

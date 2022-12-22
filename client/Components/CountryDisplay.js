@@ -15,30 +15,26 @@ const CountryDisplay = (props) => {
     // console.log(props.allCountries[i]);
     if (props.allCountries[i][2] === 'Visited') {
       visitedCountryList.push(
-        <span key={`li${i}`}>
+        <li key={`li${i}`}>
           {xButton}
           {props.allCountries[i][0]}
           {props.exist(props.allCountries[i][0]) ? (
-            <ModalCopy
-              text={props.text(props.allCountries[i][0])}
-              // modalHeader={props.modalHeader(props.allCountries[i][0])}
-              title={"Here's a header"}
-            />
+            <ModalCopy text={props.text(props.allCountries[i][0])} />
           ) : (
             <></>
           )}
-        </span>,
+        </li>,
       );
     } else {
       bucketListList.push(
         <li key={`li${i}`}>
           <button id="upgrade" className="listButton" onClick={props.upgrade}>
-            &#8593;
+            &#9650;
           </button>
           {xButton}
           {props.allCountries[i][0]}
           {props.exist(props.allCountries[i][0]) ? (
-            <ModalCopy text={props.text} />
+            <ModalCopy text={props.text(props.allCountries[i][0])} />
           ) : (
             <></>
           )}

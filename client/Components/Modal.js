@@ -38,9 +38,9 @@ function FancyModalButton(props) {
   }
 
   return (
-    <div>
+    <span>
       <button className="modalButton" onClick={toggleModal}>
-        i
+        &#9733;
       </button>
       <StyledModal
         isOpen={isOpen}
@@ -58,7 +58,7 @@ function FancyModalButton(props) {
         </div>
         {/* <button onClick={toggleModal}>Close me</button> */}
       </StyledModal>
-    </div>
+    </span>
   );
 }
 
@@ -70,9 +70,9 @@ const FadingBackground = styled(BaseModalBackground)`
 function ModalCopy(props) {
   return (
     <ModalProvider backgroundComponent={FadingBackground}>
-      <div className="App">
+      <span className="App">
         <FancyModalButton text={props.text} />
-      </div>
+      </span>
     </ModalProvider>
   );
 }
