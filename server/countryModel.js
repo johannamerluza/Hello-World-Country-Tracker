@@ -15,7 +15,7 @@ mongoose
 const Schema = mongoose.Schema;
 
 const countrySchema = new Schema({
-  countryName: { type: String, required: true },
+  countryName: { type: String, required: true, unique: true },
   bucketList: { type: Boolean, required: true },
   toDo: [],
 });

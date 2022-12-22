@@ -12,20 +12,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 //server index html
-// app.get('/', (req, res) => {
-//   return res
-//     .status(200)
-//     .sendFile(path.resolve(__dirname, '../client/index.html'));
-// });
+app.get('/', (req, res) => {
+  return res
+    .status(200)
+    .sendFile(path.resolve(__dirname, '../client/index.html'));
+});
 
 app.get('/api', countryController.getAllCountries, (req, res) => {
   return res.status(200).json(res.locals.allCountries);
 });
 
 app.post('/api', countryController.addCountry, (req, res) => {
-  // console.log(res.locals.addCountry, ' added in backend');
-  // console.log('in add country');
   return res.status(200).send(`${res.locals.addCountry} was added`);
+});
+
+app.delete('/api', countryController.deleteCountry, (req, res) => {
+  return res.status(200).send(`${res.locals.deleteCountry} was deleted`);
+});
+
+app.put('/api', countryController.updateCountry, (req, res) => {
+  return res.status(200).send(`${res.locals.updateCountry} was updated`);
 });
 
 app.use((req, res) =>
