@@ -1,4 +1,6 @@
 import React from 'react';
+import { ModalCopy } from './Modal.js';
+import { ModalProvider } from 'styled-react-modal';
 
 const CountryDisplay = (props) => {
   const xButton = (
@@ -16,6 +18,15 @@ const CountryDisplay = (props) => {
         <span key={`li${i}`}>
           {xButton}
           {props.allCountries[i][0]}
+          {props.exist(props.allCountries[i][0]) ? (
+            <ModalCopy
+              text={props.text(props.allCountries[i][0])}
+              // modalHeader={props.modalHeader(props.allCountries[i][0])}
+              title={"Here's a header"}
+            />
+          ) : (
+            <></>
+          )}
         </span>,
       );
     } else {
@@ -26,6 +37,11 @@ const CountryDisplay = (props) => {
           </button>
           {xButton}
           {props.allCountries[i][0]}
+          {props.exist(props.allCountries[i][0]) ? (
+            <ModalCopy text={props.text} />
+          ) : (
+            <></>
+          )}
         </li>,
       );
     }

@@ -1,41 +1,80 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import 'react-responsive-modal/styles.css';
-import { Modal } from 'react-responsive-modal';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
+import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
-const styles = {
-  fontFamily: 'sans-serif',
-  textAlign: 'center',
-};
+const StyledModal = Modal.styled`
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  opacity: ${(props) => props.opacity};
+  transition : all 0.3s ease-in-out;`;
 
-class ModalCopy extends Component {
-  state = {
-    open: false,
-  };
+function FancyModalButton(props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [opacity, setOpacity] = useState(0);
 
-  onOpenModal = () => {
-    this.setState({ open: true });
-  };
-
-  onCloseModal = () => {
-    this.setState({ open: false });
-  };
-
-  render() {
-    const { open } = this.state;
-    return (
-      <div style={styles}>
-        <h2>react-responsive-modal</h2>
-        <button onClick={this.onOpenModal}>Open modal</button>
-        <Modal open={open} onClose={this.onCloseModal}>
-          <ul>{'HELLO'}</ul>
-          <form>
-            <input type="text" value="toDos"></input>
-          </form>
-        </Modal>
-      </div>
-    );
+  function toggleModal(e) {
+    setOpacity(0);
+    setIsOpen(!isOpen);
+    // console.log('in toggleModal: ', e.target);
   }
+
+  function afterOpen() {
+    setTimeout(() => {
+      setOpacity(1);
+    }, 100);
+  }
+
+  function beforeClose() {
+    return new Promise((resolve) => {
+      setOpacity(0);
+      setTimeout(resolve, 300);
+    });
+  }
+
+  return (
+    <div>
+      <button className="modalButton" onClick={toggleModal}>
+        i
+      </button>
+      <StyledModal
+        isOpen={isOpen}
+        afterOpen={afterOpen}
+        beforeClose={beforeClose}
+        onBackgroundClick={toggleModal}
+        onEscapeKeydown={toggleModal}
+        opacity={opacity}
+        backgroundProps={{ opacity }}
+      >
+        <div>
+          {/* <h2>Notes:</h2> */}
+          {/* <span>{props.title}</span> */}
+          {props.text}
+        </div>
+        {/* <button onClick={toggleModal}>Close me</button> */}
+      </StyledModal>
+    </div>
+  );
 }
 
-export default ModalCopy;
+const FadingBackground = styled(BaseModalBackground)`
+  opacity: ${(props) => props.opacity};
+  transition: all 0.3s ease-in-out;
+`;
+
+function ModalCopy(props) {
+  return (
+    <ModalProvider backgroundComponent={FadingBackground}>
+      <div className="App">
+        <FancyModalButton text={props.text} />
+      </div>
+    </ModalProvider>
+  );
+}
+
+export { ModalCopy, FancyModalButton };

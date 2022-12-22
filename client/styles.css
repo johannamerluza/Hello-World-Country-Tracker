@@ -57,11 +57,8 @@ body {
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  /* width: 75%; */
-  /* display: inline-block;
-  /* margin: 0 auto; */
-  /* align-self: flex-start; */
 }
+
 #firstRowForm {
   display: flex;
   flex-direction: row;
@@ -72,7 +69,6 @@ body {
 #enterCountry {
   /* margin: 10px auto; */
   text-align: center;
-  background-color: #d0d9e3;
   display: inline-block;
   color: rgba(0, 0, 0, 0.77);
   margin-right: 5px;
@@ -80,7 +76,9 @@ body {
   border: 1px solid gray;
   border-radius: 3px;
   width: 220px;
+  color: #f1f1f1;
   /* min-width: 150px; */
+  background-color: #ccd5de87;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   height: 18px;
 }
@@ -94,18 +92,23 @@ body {
   border-radius: 3px;
   width: 450px;
   /* min-width: 310px; */
-  background-color: #d0d9e3;
+  color: #f1f1f1;
+  background-color: #ccd5de87;
   box-shadow: 0 0 15px 4px rgba(104, 104, 104, 0.381);
   height: 18px;
 }
 
+::placeholder {
+  color: #f1f1f1;
+}
+
 #menu {
   display: inline-block;
-  background-color: #d0d9e3 !important;
+  background-color: #ccd5de87 !important;
   margin-left: 5px;
   text-align: center;
   width: 220px;
-
+  color: #f1f1f1 !important;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   outline: 0;
   color: rgba(0, 0, 0, 0.77);
@@ -274,4 +277,8 @@ option {
 
 .currentTab:active {
   background-color: #ffbf69;
+}
+
+.modalButton {
+  display: inline;
 }

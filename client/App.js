@@ -3,7 +3,9 @@ import axios from 'axios';
 import Map from './Components/Map.js';
 import Input from './Components/Input.js';
 import CountryDisplay from './Components/CountryDisplay.js';
+import { ModalProvider } from 'styled-react-modal';
 // import ModalCopy from './Components/Modal.js';
+import { ModalCopy } from './Components/Modal.js';
 
 const africa = new Set([
   'Algeria',
@@ -293,6 +295,8 @@ class App extends Component {
       filterArray: [],
       currentContinent: 'world',
       toDo: {},
+      isOpen: false,
+      opacity: 0,
     };
     this.url = 'http://localhost:3000/api';
     this.submit = this.submit.bind(this);
@@ -301,6 +305,14 @@ class App extends Component {
     this.delete = this.delete.bind(this);
     this.upgrade = this.upgrade.bind(this);
     this.countryFilter = this.countryFilter.bind(this);
+    this.exist = this.exist.bind(this);
+    this.toDoList = this.toDoList.bind(this);
+    this.header = this.header.bind(this);
+  }
+
+  header(country) {
+    console.log('in header: ', country);
+    return country;
   }
 
   componentDidMount() {
@@ -455,6 +467,11 @@ class App extends Component {
       });
   }
 
+  exist(country) {
+    console.log('in exist: ', country, this.state.toDo[country]);
+    return this.state.toDo[country] ? true : false;
+  }
+
   submit(e) {
     e.preventDefault();
     this.setState({ ...this.state, invalid: 'none' });
@@ -470,7 +487,7 @@ class App extends Component {
       e.target['1']['value'] = '';
       e.target['2']['value'] = '';
       this.render();
-      return this.setState({ ...this.state, invalid: '' });
+      this.setState({ ...this.state, invalid: '' });
     }
     const toDoArray = [];
     if (toDo !== '') {
@@ -522,13 +539,24 @@ class App extends Component {
     this.postCountry(newCountry, option, toDoArray);
   }
 
+  toDoList(country) {
+    console.log('in toDO list: ', this.state.toDo[country]);
+    const list = this.state.toDo[country];
+    let modalText = '';
+    let notes = [];
+    notes.push(<h2>{country}</h2>);
+    list.forEach((note) => {
+      notes.push(<li>• {note}</li>);
+    });
+    return notes;
+  }
+
   render() {
     // console.log('current continent: ', this.state.currentContinent);
     console.log('line 527', this.state);
     return (
       <div id="topCenter">
         <h1 id="helloWorld">Hello World.</h1>
-        {/* <ModalCopy /> */}
         <Input handleSubmit={this.submit} invalid={this.state.invalid} />
         <Map
           options={this.state.options}
@@ -544,11 +572,14 @@ class App extends Component {
               ? this.state.countries
               : this.state.filteredArray
           }
+          exist={this.exist}
           deleteCountry={this.delete}
           upgrade={this.upgrade}
           countryTotal={this.state.countryTotal}
           cTab={this.countryFilter}
           currentContinent={this.state.currentContinent}
+          text={this.toDoList}
+          // modalHeader={this.header}
         />
       </div>
     );
