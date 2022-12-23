@@ -551,20 +551,20 @@ class App extends Component {
     let modalText = '';
     let notes = [];
     notes.push(<h2>{country}</h2>);
-    if (country === 'Colombia') {
-      notes.push(<li>• Grab coffee with Kelvin!</li>);
-      notes.push(<img src={Kelvin}></img>);
-      return notes;
-    }
-    if (country === 'Canada') {
-      notes.push(<li>• Visit Christian and Steven!</li>);
-      notes.push(<img src={Christian}></img>);
-      notes.push(<img src={Steven}></img>);
-      return notes;
-    }
-    if (country === 'Philippines') {
-      notes.push(<img src={Kat}></img>);
-    }
+    // if (country === 'Colombia') {
+    //   notes.push(<li>• Grab coffee with Kelvin!</li>);
+    //   notes.push(<img src={Kelvin}></img>);
+    //   return notes;
+    // }
+    // if (country === 'Canada') {
+    //   notes.push(<li>• Visit Christian and Steven!</li>);
+    //   notes.push(<img src={Christian}></img>);
+    //   notes.push(<img src={Steven}></img>);
+    //   return notes;
+    // }
+    // if (country === 'Philippines') {
+    //   notes.push(<img src={Kat}></img>);
+    // }
     const list = this.state.toDo[country];
     list.forEach((note) => {
       notes.push(<li>• {note}</li>);
