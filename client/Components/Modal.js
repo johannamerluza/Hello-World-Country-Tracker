@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
 const StyledModal = Modal.styled`
+  padding-right: 20px;
+  padding-left: 20px;
   width: 20rem;
   height: 20rem;
   display: flex;

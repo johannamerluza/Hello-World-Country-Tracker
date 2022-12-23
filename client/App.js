@@ -330,6 +330,7 @@ class App extends Component {
       this.setState({ ...this.state, filtered: false });
       return this.getAllCountries();
     }
+    // this.getAllCountries();
     const newRegion = regions[e.target.value];
     const newCount = countryCount[e.target.value];
     const continent = worldCountriesObj[e.target.value];
