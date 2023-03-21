@@ -4,13 +4,7 @@ import Map from './Components/Map.js';
 import Input from './Components/Input.js';
 import CountryDisplay from './Components/CountryDisplay.js';
 import { ModalProvider } from 'styled-react-modal';
-// import ModalCopy from './Components/Modal.js';
 import { ModalCopy } from './Components/Modal.js';
-// import FileLoader from 'file-loader';
-import Kelvin from './images/kelvin.png';
-import Christian from './images/christian.png';
-import Steven from './images/Steven.png';
-import Kat from './images/Kat.png';
 
 const africa = new Set([
   'Algeria',
@@ -437,7 +431,7 @@ class App extends Component {
     axios
       .post(this.url, newCountry)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         this.getAllCountries();
       })
       .catch((error) => {
@@ -551,20 +545,6 @@ class App extends Component {
     let modalText = '';
     let notes = [];
     notes.push(<h2>{country}</h2>);
-    // if (country === 'Colombia') {
-    //   notes.push(<li>• Grab coffee with Kelvin!</li>);
-    //   notes.push(<img src={Kelvin}></img>);
-    //   return notes;
-    // }
-    // if (country === 'Canada') {
-    //   notes.push(<li>• Visit Christian and Steven!</li>);
-    //   notes.push(<img src={Christian}></img>);
-    //   notes.push(<img src={Steven}></img>);
-    //   return notes;
-    // }
-    // if (country === 'Philippines') {
-    //   notes.push(<img src={Kat}></img>);
-    // }
     const list = this.state.toDo[country];
     list.forEach((note) => {
       notes.push(<li>• {note}</li>);
