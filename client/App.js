@@ -6,6 +6,8 @@ import CountryDisplay from './Components/CountryDisplay.js';
 import { ModalProvider } from 'styled-react-modal';
 import { ModalCopy } from './Components/Modal.js';
 
+//need to move country list to server side
+
 const africa = new Set([
   'Algeria',
   'Angola',
